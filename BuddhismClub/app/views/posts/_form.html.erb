@@ -26,6 +26,13 @@
     <%= form.file_field :file, multiple: true %>
   </div>
 
+  <% if current_user.admin %>
+    <div class="field">
+      <%= form.label "Make Official" %> <br />
+      <%= form.check_box :official %> <br />
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

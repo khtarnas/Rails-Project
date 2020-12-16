@@ -1,7 +1,7 @@
 <h1>Posts</h1>
 
 <% if current_user %>
-  <button type="button" href="posts/new" class="btn btn-secondary">Create a Post</button>
+  <a class="btn btn-secondary btn-sm" href="/posts/new" role="button">Create a Post</a>
   <br>
   <br class='smaller-break'>
 <% end %>
@@ -18,17 +18,32 @@
     </thead>
   <% end %>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= post.user.email %></td>
-        <td><%= link_to 'Show', post %></td>
-        <% if post.user_id = current_user.id || current_user.admin %>
-          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+  <% if current_user %>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.title %></td>
+          <td><%= post.content %></td>
+          <td><%= post.user.email %></td>
+          <td><%= link_to 'Show', post %></td>
+          <% if post.user_id = current_user.id || current_user.admin %>
+            <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <tbody>
+      <% @posts.each do |post| %>
+        <% if post.official %>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= post.content %></td>
+            <td><%= post.user.email %></td>
+            <td><%= link_to 'Show', post %></td>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
+      <% end %>
+    </tbody>
+  <% end %>
 </table>
