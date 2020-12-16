@@ -1,12 +1,18 @@
 <h1>Posts</h1>
 
+<% if current_user %>
+  <button type="button" href="posts/new" class="btn btn-secondary">Create a Post</button>
+  <br>
+  <br class='smaller-break'>
+<% end %>
+
 <table>
   <% if @posts.any? %>
     <thead>
       <tr>
         <th>Title:</th>
         <th>Content:</th>
-        <th>User Email:</th>
+        <th>By:</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -26,7 +32,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>

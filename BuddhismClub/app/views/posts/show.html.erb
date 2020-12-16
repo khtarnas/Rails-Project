@@ -1,17 +1,20 @@
-<p>
-  <strong>User Email:</strong>
-  <%= @post.user.email %>
-</p>
 
-<p>
+<p style="font-size:225%;">
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
+<p style="font-size:120%;">
+  <strong>By:</strong>
+  <%= @post.user.email %>
 </p>
+
+<% unless @post.content.empty? %>
+  <p>
+    <strong>Content:</strong>
+    <%= @post.content %>
+  </p>
+<% end %>
 
 <% if @post.file.any?%> 
   <p><strong>Attachment:</strong></p>

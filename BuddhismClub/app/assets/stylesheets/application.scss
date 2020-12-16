@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+ 
+ // Custom bootstrap variables must be set or imported *before* bootstrap.
+ @import "bootstrap";
+
+body {
+    padding-top: 10px; 
+}
+
+.nav-element {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-brand {
+    font-size: 98%;
+    color:gainsboro;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.smaller-break {
+    line-height: 50%;
+}
+
+.email {
+    margin-top: 13px;
+    color:gainsboro;
+}
