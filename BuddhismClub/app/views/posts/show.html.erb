@@ -1,4 +1,9 @@
 <p>
+  <strong>User Email:</strong>
+  <%= @post.user.email %>
+</p>
+
+<p>
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
@@ -8,10 +13,24 @@
   <%= @post.content %>
 </p>
 
-<p>
-  <strong>User Email:</strong>
-  <%= @post.user.email %>
-</p>
+<% if @post.file.any?%> 
+  <p><strong>Attachment:</strong></p>
+  <% @post.file.each do |type| %>
+    <% if type.image? %>
+      <img src = "<%=url_for(type)%>" />
+    <% elsif type.audio? %>
+      <audio controls>
+        <source src="<%=url_for(type)%>" type="audio/mpeg">
+      </audio> 
+    <% elsif type.video? %>
+      <video width="320" height="240" controls>
+        <source src=type type="video/mp4">
+      </video> 
+    <% end %>
+    <br>
+  <% end %>
+<% end %>
+
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <td><%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %></td> |

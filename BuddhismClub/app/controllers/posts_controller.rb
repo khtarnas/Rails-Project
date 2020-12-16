@@ -27,6 +27,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
+    #add_default_attachment
 
     respond_to do |format|
       if @post.save
@@ -71,6 +72,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content, file: [])
     end
 end
