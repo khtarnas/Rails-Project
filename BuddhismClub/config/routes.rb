@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :friendships
   root to: 'pages#home'
   
   resources :posts do

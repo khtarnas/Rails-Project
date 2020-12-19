@@ -1,6 +1,16 @@
 <h1>Profile of <%=@user.email%>:</h1>
 
-<p>blah blah blah</p>
+<p>Friends:<p>
+
+<ul>
+    <% @user.friendships.each do |friendship| %>
+        <li>
+            <%= friendship.friend.email %>
+            (<%= link_to "unfriend", friendship, :method => :delete %>)
+        </li>
+    <% end %>
+</ul>
+
 <p>
 <%= link_to 'Back', '/users/' %>|
 <td><%= link_to 'View Home', user_home_path(@user.id) %></td>|
