@@ -1,13 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Post:</strong>
-  <%= @comment.post %>
-</p>
+<br>
+
+<h3> 
+  <% user = User.find(@comment.user_id) %>
+  <% if user = current_user.id %>
+    You
+  <% else %>
+    <% user %>
+  <% end %>
+
+  commented on the post "<%= @comment.post.title %>" saying:
+</h3>
 
 <p>
-  <strong>Content:</strong>
-  <%= @comment.content %>
+ <%= @comment.content %>
 </p>
 
 <%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %> |

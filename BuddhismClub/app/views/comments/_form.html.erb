@@ -12,13 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :post_id %>
-    <%= form.text_field :post_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, maxlength: 280, size: 30 %>
   </div>
 
   <div class="actions">

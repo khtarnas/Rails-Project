@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   after_commit :add_default_avatar, on: [:create, :update]
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def avatar_thumbnail
     if avatar.attached?
