@@ -17,7 +17,8 @@
 
 <p>
 <%= link_to 'Back', '/users/' %>|
-<td><%= link_to 'View Home', user_home_path(@user.id) %></td>|
+<% link = '/users/' + @user.id.to_s + '/home/' %>
+<td><%= link_to 'View Home', link %></td>|
 <% if @user == current_user %>
     <td><%= link_to 'Edit Your Account', edit_user_registration_path %></td>
     <%if @user.admin and User.all.where(:admin => true)[1]%>

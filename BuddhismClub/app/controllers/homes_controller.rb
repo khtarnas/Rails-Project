@@ -1,4 +1,3 @@
-require 'pry'
 class HomesController < ApplicationController
   before_action :set_home, only: [:show, :edit, :update, :destroy]
 
@@ -68,8 +67,29 @@ class HomesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_home
-      binding.pry
-      @home = Home.find_by(user_id = params[:user_id])
+      @home = Home.find_by(user_id: params[:user_id])
+      unless @home
+        if params[:user_id] == current_user.id.to_s
+
+          @home = Home.new(user_id: params[:user_id])
+          respond_to do |format|
+            if @home.save
+              format.html { redirect_to user_home_path(User.find(@home.user_id), @home), notice: 'Home was successfully created.' }
+              format.json { render :show, status: :created, location: @home }
+            else
+              format.html { render :new }
+              format.json { render json: @home.errors, status: :unprocessable_entity }
+            end
+          end
+
+        else
+          link = '/users/' + params[:user_id]
+          respond_to do |format|
+            format.html { redirect_to link, alert: 'This user has not yet set a home.' }
+            format.json { head :no_content }
+          end
+        end
+      end
     end
 
     # Only allow a list of trusted parameters through.
