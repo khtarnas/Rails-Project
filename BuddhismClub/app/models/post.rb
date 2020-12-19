@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many_attached :file
   validate :correct_file_type
   validates :title, presence: true
+  has_many :comments
   #after_commit :add_default_attachment, on: [:create, :update]
 
   def correct_file_type

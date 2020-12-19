@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :avatar
   after_commit :add_default_avatar, on: [:create, :update]
+  has_many :posts, dependent: :destroy
 
   def avatar_thumbnail
     if avatar.attached?
