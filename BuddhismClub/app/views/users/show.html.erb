@@ -23,8 +23,13 @@
     <%if @user.admin and User.all.where(:admin => true)[1]%>
         <%= link_to "Demote yourself to member", change_user_status_path(@user, 'false'), :confirm=>'Are you sure?' %>
     <% end %>
-<% elsif current_user.admin and not @user.admin %>
-    <%= link_to "Make user an admin", change_user_status_path(@user, 'true'), :confirm=>'Are you sure?' %>
+<% else %>
+    <%if current_user.admin and not @user.admin %>
+        <%= link_to "Make user an admin", change_user_status_path(@user, 'true'), :confirm=>'Are you sure?' %>
+    <% end %>
+    <%unless Friendship.find_by(:user_id == current_user.id, :friend_id == @user.id) %>
+        <%= link_to 'Add Friend', friendships_path(:friend_id => @user), :method => :post %>
+    <% end %>
 <% end %>
 
 </p>

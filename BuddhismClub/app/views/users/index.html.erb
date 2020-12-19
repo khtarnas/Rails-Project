@@ -1,5 +1,4 @@
 <h1>PBC peeps:</h1>
-
 <%if current_user %>
 
 <table>
@@ -19,13 +18,13 @@
           <td><%= user.admin %></td>
           <td><%= link_to 'Show', user %></td>
           <td><%= link_to 'Home', user_home_path(user.id) %></td>
-          <% friendship = Friendship.find_by(:user == current_user, :friend == user) %>
+          <% friendship = Friendship.all.where(user: current_user, friend: user)[0] %>
           <% if user == current_user %>
             <td><%= link_to 'Edit Your Account', edit_user_registration_path %></td>
           <% elsif not friendship %>
             <td><%= link_to 'Add Friend', friendships_path(:friend_id => user), :method => :post %></td>
           <% else %>
-            <td><%= link_to "unfriend", friendship_url(friendship), :method => :delete %></td>
+            <td><%= link_to "unfriend", friendship_url(friendship.id), :method => :delete %></td>
           <% end %>
         </tr>
       <% end %>

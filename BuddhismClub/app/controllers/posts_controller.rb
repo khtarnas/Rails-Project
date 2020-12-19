@@ -13,6 +13,10 @@ class PostsController < ApplicationController
   def show
   end
 
+  def friends
+    @posts = Post.all
+  end
+
   # GET /posts/new
   def new
     @post = Post.new
@@ -74,4 +78,5 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content, :official, file: [])
     end
+
 end

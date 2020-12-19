@@ -1,51 +1,16 @@
 class FriendshipsController < ApplicationController
-  before_action :set_friendship, only: [:show, :edit, :update, :destroy]
-
-  # GET /friendships
-  # GET /friendships.json
-  def index
-    @friendships = Friendship.all
-  end
-
-  # GET /friendships/1
-  # GET /friendships/1.json
-  def show
-  end
-
-  # GET /friendships/new
-  def new
-    @friendship = Friendship.new
-  end
-
-  # GET /friendships/1/edit
-  def edit
-  end
+  before_action :set_friendship, only: [:destroy]
 
   # POST /friendships
   # POST /friendships.json
   def create
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
-
     respond_to do |format|
       if @friendship.save
         format.html { redirect_to '/users/', notice: 'Added Friend Successfully!' }
         format.json { render :show, status: :created, location: @friendship }
       else
         format.html { redirect_to '/users/' }
-        format.json { render json: @friendship.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /friendships/1
-  # PATCH/PUT /friendships/1.json
-  def update
-    respond_to do |format|
-      if @friendship.update(friendship_params)
-        format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
-        format.json { render :show, status: :ok, location: @friendship }
-      else
-        format.html { render :edit }
         format.json { render json: @friendship.errors, status: :unprocessable_entity }
       end
     end

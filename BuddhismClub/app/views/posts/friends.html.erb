@@ -1,0 +1,49 @@
+<h1>Friend's Posts</h1>
+
+<a class="btn btn-secondary btn-sm" href="/posts/new" role="button">Create a Post</a>
+<br>
+<br class='smaller-break'>
+
+<table>
+  <% if @posts.any? %>
+    <thead>
+      <tr>
+        <th>Title:</th>
+        <th>Content:</th>
+        <th>By:</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  <% end %>
+
+  <% if current_user %>
+    <tbody>
+      <% @posts.each do |post| %>
+        <% if Friendship.find_by(:user_id == current_user.id, :friend_id == post.user_id) and not current_user.id == post.user_id %>
+            <tr>
+            <td><%= post.title %></td>
+            <td><%= post.content %></td>
+            <td><%= post.user.email %></td>
+            <td><%= link_to 'Show', post %></td>
+            <% if post.user_id = current_user.id || current_user.admin %>
+                <td><%= link_to 'Edit', edit_post_path(post) %></td>
+            <% end %>
+            </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% else %>
+    <tbody>
+      <% @posts.each do |post| %>
+        <% if post.official %>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= post.content %></td>
+            <td><%= post.user.email %></td>
+            <td><%= link_to 'Show', post %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
