@@ -1,5 +1,5 @@
 class Home < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: false
   validates :city, presence: true
   
   # Query and return the weather forecast from the API

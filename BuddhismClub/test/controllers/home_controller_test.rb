@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class HomesControllerTest < ActionDispatch::IntegrationTest
+class HomeControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @home = homes(:one)
+    @home = home(:one)
   end
 
   test "should get index" do
-    get homes_url
+    get home_url
     assert_response :success
   end
 
@@ -17,7 +17,7 @@ class HomesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create home" do
     assert_difference('Home.count') do
-      post homes_url, params: { home: { city: @home.city, user_id: @home.user_id } }
+      post home_url, params: { home: { city: @home.city, user_id: @home.user_id } }
     end
 
     assert_redirected_to home_url(Home.last)
@@ -43,6 +43,6 @@ class HomesControllerTest < ActionDispatch::IntegrationTest
       delete home_url(@home)
     end
 
-    assert_redirected_to homes_url
+    assert_redirected_to home_url
   end
 end

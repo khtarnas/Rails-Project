@@ -1,10 +1,11 @@
+require 'pry'
 class HomesController < ApplicationController
   before_action :set_home, only: [:show, :edit, :update, :destroy]
 
   # GET /homes
   # GET /homes.json
   def index
-    @homes = Home.all
+    @home = Home.all
   end
 
   # GET /homes/1
@@ -31,7 +32,7 @@ class HomesController < ApplicationController
 
     respond_to do |format|
       if @home.save
-        format.html { redirect_to @home, notice: 'Home was successfully created.' }
+        format.html { redirect_to user_home_path(User.find(@home.user_id), @home), notice: 'Home was successfully created.' }
         format.json { render :show, status: :created, location: @home }
       else
         format.html { render :new }
@@ -45,7 +46,7 @@ class HomesController < ApplicationController
   def update
     respond_to do |format|
       if @home.update(home_params)
-        format.html { redirect_to @home, notice: 'Home was successfully updated.' }
+        format.html { redirect_to user_home_path(User.find(@home.user_id), @home), notice: 'Home was successfully updated.' }
         format.json { render :show, status: :ok, location: @home }
       else
         format.html { render :edit }
@@ -59,7 +60,7 @@ class HomesController < ApplicationController
   def destroy
     @home.destroy
     respond_to do |format|
-      format.html { redirect_to homes_url, notice: 'Home was successfully destroyed.' }
+      format.html { redirect_to user_homes_url, notice: 'Home was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,7 +68,7 @@ class HomesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_home
-      @home = Home.find(params[:id])
+      @home = Home.find_by(user_id = params[:user_id])
     end
 
     # Only allow a list of trusted parameters through.

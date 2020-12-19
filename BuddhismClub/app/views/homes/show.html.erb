@@ -20,5 +20,7 @@
   <%= @min_temp %> to <%= @max_temp %>
 </p>
 
-<%= link_to 'Edit', edit_home_path(@home) %> |
-<%= link_to 'Back', homes_path %>
+<%= link_to 'Change home', edit_user_home_path(User.find(@home.user_id), @home) %>
+<% link = '/users/' + @home.user.id.to_s %>
+<%= link_to 'Back', link %>
+

@@ -1,29 +1,34 @@
+<% require 'pry'; binding.pry %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Homes</h1>
+<h1>Home</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>City</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% user = params[:user_id] %>
+<% user_obj = User.find(user) %>
+<% if user_obj.home %>
 
-  <tbody>
-    <% @homes.each do |home| %>
+  <table>
+    <thead>
+      <tr>
+        <th>City</th>
+        <th>User</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
       <tr>
         <td><%= home.city %></td>
         <td><%= home.user %></td>
-        <td><%= link_to 'Show', home %></td>
-        <td><%= link_to 'Edit', edit_home_path(home) %></td>
-        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user_home_path(user, @home) %></td>
+        <td><%= link_to 'Edit', edit_user_home_path(user, @home) %></td>
+        <td><%= link_to 'Destroy', edit_user_home_path(user, @home), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New Home', new_home_path %>
+<% end %>
+<%= link_to 'New Home', new_user_home_path %>

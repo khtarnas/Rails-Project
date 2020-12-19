@@ -2,5 +2,5 @@
 
 <%= render 'form', home: @home %>
 
-<%= link_to 'Show', @home %> |
-<%= link_to 'Back', homes_path %>
+<%= link_to 'Show', edit_user_home_path(User.find(@home.user_id), @home) %> |
+<%= link_to 'Back', user_home_path %>

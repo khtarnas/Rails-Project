@@ -1,0 +1,10 @@
+<h1>Profile of <%=@user.email%>:</h1>
+
+<p>blah blah blah</p>
+<p>
+<%= link_to 'Back', '/users/' %>|
+<td><%= link_to 'View Home', user_home_path(@user.id) %></td>|
+<% if @user == current_user %>
+    <td><%= link_to 'Edit Your Account', edit_user_registration_path %></td>
+<% end %>
+</p>
