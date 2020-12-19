@@ -54,7 +54,7 @@ class FriendshipsController < ApplicationController
   # DELETE /friendships/1
   # DELETE /friendships/1.json
   def destroy
-    @friendship = current_user.friendships.find(params[:id])
+    @friendship = Friendship.find(params[:id])
     @friendship.destroy
     respond_to do |format|
       link = '/users/' + current_user.id.to_s

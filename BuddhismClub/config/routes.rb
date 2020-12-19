@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :friendships
   root to: 'pages#home'
+  
+  get '/users/:user/:bool' => 'users#change_status', as: :change_user_status
+
+  resources :friendships #only create and destroy?
   
   resources :posts do
     resources :comments

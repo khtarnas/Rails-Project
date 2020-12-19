@@ -1,5 +1,9 @@
 <h1>Profile of <%=@user.email%>:</h1>
 
+<p> Admin:
+<%= @user.admin %>
+</p>
+
 <p>Friends:<p>
 
 <ul>
@@ -16,5 +20,11 @@
 <td><%= link_to 'View Home', user_home_path(@user.id) %></td>|
 <% if @user == current_user %>
     <td><%= link_to 'Edit Your Account', edit_user_registration_path %></td>
+    <%if @user.admin and User.all.where(:admin => true)[1]%>
+        <%= link_to "Demote yourself to member", change_user_status_path(@user, 'false'), :confirm=>'Are you sure?' %>
+    <% end %>
+<% elsif current_user.admin and not @user.admin %>
+    <%= link_to "Make user an admin", change_user_status_path(@user, 'true'), :confirm=>'Are you sure?' %>
 <% end %>
+
 </p>

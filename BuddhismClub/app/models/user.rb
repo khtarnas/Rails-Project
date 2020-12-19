@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, :through => :friendships
 
+
   def avatar_thumbnail
     if avatar.attached?
       avatar.variant(resize: "37x37!").processed

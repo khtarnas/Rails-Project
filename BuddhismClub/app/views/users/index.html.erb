@@ -1,4 +1,7 @@
-<h1>Users</h1>
+<h1>PBC peeps:</h1>
+
+<%if current_user %>
+
 <table>
     <thead>
       <tr>
@@ -27,5 +30,10 @@
         </tr>
       <% end %>
     </tbody>
+<% else %>
+  <p>
+    Please <%= link_to 'log in', new_user_session_path %> to view our members.
+  </p>
+<% end %>
 
 </table>
