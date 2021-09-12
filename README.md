@@ -1,0 +1,1 @@
+A final project for CIS196 where I used the Ruby on Rails framework and many gems that work with Ruby on Rails for the backend and Bootstrap mixed with plain CSS for the frontend to create a website with user identification, file storage, and a backend with multiple types of relationships (one-to-one, many-to-many, one-to-many).
